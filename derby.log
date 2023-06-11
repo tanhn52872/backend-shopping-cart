@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Mar 07 10:39:22 ICT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0186-ba26-fce2-00000bf39a40 
+on database directory memory:C:\eclipse-workspace\AngularMobileApp\backend-shopping-cart\b4c0a275-46fa-47f6-92bc-1fe69ed2dcdc with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@512ddf17 
+Loaded from file:/C:/Users/HTY6HC/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Red Hat, Inc.
+java.runtime.version=11.0.18+10-LTS
+user.dir=C:\eclipse-workspace\AngularMobileApp\backend-shopping-cart
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
