@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.product.ProductDto;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Product;
 
@@ -30,26 +30,31 @@ public class ProductService {
         return product;
     }
 
-    public void createProduct(ProductDto productDto, Category category) {
-        Product product = new Product();
-        product.setDescription(productDto.getDescription());
-        product.setImageURL(productDto.getImageURL());
-        product.setName(productDto.getName());
-        product.setCategory(category);
-        product.setPrice(productDto.getPrice());
-        productDAO.save(product);
+    public void createProduct(Product product, Category category) {
+        Product newProduct = new Product();
+        newProduct.setDescription(product.getDescription());
+        newProduct.setImageURL(product.getImageURL());
+        newProduct.setName(product.getName());
+        newProduct.setCategory(category);
+        newProduct.setPrice(product.getPrice());
+        productDAO.save(newProduct);
     }
 
-    public void updateProduct(ProductDto productDto, Integer productId) throws Exception {
+    public void updateProduct(Product product, Integer productId) throws Exception {
         if(productDAO.findProductById(productId)!=null) {
             Product newpProduct = productDAO.findProductById(productId);
-            newpProduct.setDescription(productDto.getDescription());
-            newpProduct.setImageURL(productDto.getImageURL());
-            newpProduct.setPrice(productDto.getPrice());
+            newpProduct.setDescription(product.getDescription());
+            newpProduct.setImageURL(product.getImageURL());
+            newpProduct.setPrice(product.getPrice());
             productDAO.save(newpProduct);
         }
         else{
             throw new Exception("product not present");
         }
     }
+
+    public void deleteAllProduct(){
+        productDAO.deleteAll();
+    }
+
 }

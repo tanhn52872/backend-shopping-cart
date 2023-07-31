@@ -13,6 +13,8 @@ import com.example.demo.entity.Product;
 public interface Productrepository extends JpaRepository<Product, Integer> {
 //	@Query(value="select * from Product", nativeQuery = true)
 	List<Product> findAll();
-	@Query(value ="select * from products p where p.id = 1", nativeQuery = true)
+	@Query(value ="select * from products p where p.id = :id", nativeQuery = true)
 	Product findProductById(@Param("id") Integer id);
+
+
 }

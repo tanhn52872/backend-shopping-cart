@@ -1,7 +1,10 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -10,17 +13,19 @@ import java.util.Set;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Integer id;
 
     @Column(name = "category_name")
-    private @NotBlank String categoryName;
+    private  String categoryName;
 
-    private @NotBlank String description;
+    private  String description;
 
-    private @NotBlank String imageUrl;
+    private  String imageUrl;
 
     // add imageURL here
+
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
@@ -29,12 +34,12 @@ public class Category {
     public Category() {
     }
 
-    public Category(@NotBlank String categoryName, @NotBlank String description) {
+    public Category( String categoryName,  String description) {
         this.categoryName = categoryName;
         this.description = description;
     }
 
-    public Category(@NotBlank String categoryName, @NotBlank String description, @NotBlank String imageUrl) {
+    public Category(String categoryName, String description,  String imageUrl) {
         this.categoryName = categoryName;
         this.description = description;
         this.imageUrl = imageUrl;

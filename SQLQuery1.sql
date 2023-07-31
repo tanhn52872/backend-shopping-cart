@@ -17,12 +17,12 @@ CREATE TABLE categories (
 
 
 CREATE TABLE products (
-    id bigint NOT NULL,
+    id bigint  ,
     description character varying(255),
     imageurl character varying(255),
     name character varying(255),
-    price double precision NOT NULL,
-    category_id bigint NOT NULL
+    price double precision ,
+    category_id bigint
 );
 
 insert into products(id,description,imageurl,name,price,category_id)

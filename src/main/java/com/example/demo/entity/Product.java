@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.dto.product.ProductDto;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,33 +13,31 @@ import javax.validation.constraints.NotNull;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	private @NotNull String name;
-	private @NotNull String imageURL;
-	private @NotNull double price;
-	private @NotNull String description;
+	private  String name;
+	private  String imageURL;
+	private  double price;
+	private  String description;
 
+
+
+
+	@ManyToOne
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "category_id", nullable = false)
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "category_id")
 	Category category;
 
-//	@JsonIgnore
+
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 //	private List<WishList> wishListList;
-
-
 //	@JsonIgnore
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 //	private List<Cart> carts;
 
-
-
-
-
-	public Product(ProductDto productDto, Category category) {
+	public Product(Product productDto, Category category) {
 		this.name = productDto.getName();
 		this.imageURL = productDto.getImageURL();
 		this.description = productDto.getDescription();
@@ -106,6 +104,14 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+//	public Integer getCategoryId() {
+//		return categoryId;
+//	}
+//
+//	public void setCategoryId(Integer categoryId) {
+//		this.categoryId = categoryId;
+//	}
 
 	@Override
 	public String toString() {

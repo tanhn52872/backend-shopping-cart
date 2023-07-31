@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.common.ApiResponse;
-import com.example.demo.dto.product.ProductDto;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.Category;
 import com.example.demo.repository.Categoryrepository;
 import com.example.demo.service.ProductService;
@@ -23,24 +23,29 @@ public class ProductController {
 	Categoryrepository categoryrepository;
 	@Autowired
 	ProductService productService;
-	@RequestMapping(value="/list",method=RequestMethod.GET)
+	@RequestMapping(value="/listProduct",method=RequestMethod.GET)
 	public List<Product> getAllProducts(){
 		List<Product> products = new ArrayList<>();
 		System.out.println(this.productService.findAllProduct());
 		return this.productService.findAllProduct();
 	}
-	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public ResponseEntity<ApiResponse> createProduct(@RequestBody ProductDto productDTO){
-		Optional<Category> optionalCategory = categoryrepository.findById(productDTO.getCategoryId());
-		if(optionalCategory.isPresent()){
+	@RequestMapping(value="/addProduct",method=RequestMethod.POST)
+	public ResponseEntity<ApiResponse> createProduct(@RequestBody Product product){
+		Optional<Category> optionalCategory = categoryrepository.findById(product.getCategory().getId());
+		if(!optionalCategory.isPresent()){
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false,"category is not exists"),HttpStatus.BAD_REQUEST);
 		}
-		productService.createProduct(productDTO,optionalCategory.get());
+		productService.createProduct(product,optionalCategory.get());
 		return new ResponseEntity<ApiResponse>(new ApiResponse(true,"product has been added"), HttpStatus.CREATED);
 	}
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public ResponseEntity<ApiResponse> editProduct(@PathVariable ("productId") Integer productId, @RequestBody ProductDto productDto) throws Exception {
-		productService.updateProduct(productDto,productId);
+	@PostMapping(value="/updateProduct/{productId}")
+	public ResponseEntity<ApiResponse> editProduct(@PathVariable ("productId") Integer productId, @RequestBody Product product) throws Exception {
+		productService.updateProduct(product,productId);
 		return new ResponseEntity<ApiResponse>(new ApiResponse(true,"product has been added"), HttpStatus.CREATED);
+	}
+	@DeleteMapping("/deleteAllProducts/")
+	public void deleteAllProducts(){
+		productService.deleteAllProduct();
+		System.out.println("All products have been deleted");
 	}
 }

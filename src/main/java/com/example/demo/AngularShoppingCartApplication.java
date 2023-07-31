@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.List;
 
 
-@SpringBootApplication
+@SpringBootApplication()
 public class AngularShoppingCartApplication {
 
 	public static void main(String[] args) {

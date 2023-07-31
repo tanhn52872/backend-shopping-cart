@@ -21,7 +21,7 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
     @GetMapping("/")
-    public ResponseEntity<List<Category>> getCategories() {
+    public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> body = categoryService.listCategories();
         return new ResponseEntity<List<Category>>(body, HttpStatus.OK);
     }
@@ -42,6 +42,13 @@ public class CategoryController {
         }
         // If the category doesn't exist then return a response of unsuccessful.
         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category does not exist"), HttpStatus.NOT_FOUND);
+    }
+
+
+    @DeleteMapping("/deleteAllCategories/")
+    public void deleteAllProducts(){
+        categoryService.deleteAllCategories();
+        System.out.println("All Categories have been deleted");
     }
 
 }
